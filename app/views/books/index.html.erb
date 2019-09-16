@@ -1,0 +1,116 @@
+<head><style type="text/css">.turbolinks-progress-bar {
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: #0076ff;
+  z-index: 9999;
+  transition: width 300ms ease-out, opacity 150ms 150ms ease-in;
+  transform: translate3d(0, 0, 0);
+}</style>
+
+  <title>WebCampBackendNew</title>
+
+ </head>
+
+
+<body>
+
+
+
+<div class="success">
+<% if flash[:notice] %>
+        <%= flash[:notice] %>
+    <% end %>
+</div>
+
+
+
+
+<h1>Books</h1>
+<table>
+ <table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Body</th>
+			<th></th>
+		</tr>
+	</thead>
+
+    <tbody>
+
+ <% @books.each do |t| %>
+ <tr>
+    		<td><%=t.title %></td>
+    		<td><%=t.body %></td>
+    		<td><%= link_to "show",book_path(t) %></td>
+    		<td><%= link_to "edit",edit_book_path(t) %></td>
+        <td><%= link_to 'Destroy', book_path(t), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+    		</th>
+
+    	</tr>
+    	<% end %>
+    </tbody>
+</table>
+
+
+
+<h3>New Book</h3>
+
+
+
+
+<!-- フォームの部分 -->
+
+<div class="form">
+
+
+
+
+<%= form_for(@book) do |t| %>
+
+
+
+
+<% if flash[:notice] %>
+        <%= flash[:notice] %>
+<% end %>
+
+
+
+
+<% if @book.errors.any? %>
+
+      <% @book.errors.full_messages.each do |t| %>
+        <li><%= t %></li>
+      <% end %>
+
+
+<% end %>
+
+
+
+
+
+  <h4>Titile</h4>
+  <%= t.text_field :title %>
+
+  <h4>Body</h4>
+  <%= t.text_area :body %>
+<br>
+  <%= t.submit 'Create Book' %>
+
+
+
+<% end %>
+
+
+</div>
+
+
+
+
+</body>
